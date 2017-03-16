@@ -21,6 +21,7 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "bulma": "^0.3.2",
+    "font-awesome": "^4.7.0",
     "noto-sans-kr": "^0.1.1",
     "vue": "^2.2.1"
   },
