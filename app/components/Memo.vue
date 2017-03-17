@@ -4,7 +4,7 @@
 			.media-right
 				//TODO image
 			.media-content
-				strong {{ memo.music }}
+				strong {{ memo.text }}
 			.media-right
 				p {{ memo.name }}
 </template>
