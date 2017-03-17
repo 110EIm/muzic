@@ -24,7 +24,7 @@ module.exports = async (io) => {
 			if(config.password === pwd) {
 				m.clear()
 					.then(() => {
-						console.log('memo is cleared');
+						console.log('memos are cleared');
 						socket.emit('res memo clear', { result: true});
 					})
 					.catch((err) => emit('res memo clear', {err, result: false}));

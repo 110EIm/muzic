@@ -15,7 +15,8 @@ app.get('/', (req, res) => {
 
 const server = app.listen(8080, (req, res) => {
 	require('./src/socket')(io.listen(server)).then(() => {
-		console.log('Server starts');
+		require('./src/timer');
+		console.log('Server opened');
 	}).catch((err) => {
 		console.error(err);
 	})
