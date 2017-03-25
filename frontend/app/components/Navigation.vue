@@ -1,5 +1,5 @@
 <template lang="pug">
-	.nav.has-shadow: .container
+	.nav.has-shadow.is-dark: .container
 		.nav-left
 			.nav-item
 				h1.title WP 신청곡
@@ -9,8 +9,6 @@
 </template>
 
 <script>
-	import Writer from './Writer.vue';
-
 	export default {
 		props: ['toggle']
 	}

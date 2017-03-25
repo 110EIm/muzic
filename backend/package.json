@@ -1,0 +1,33 @@
+{
+  "name": "muzic-frontend",
+  "version": "1.0.0",
+  "description": "Muzic frontend",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development node index",
+    "start": "cross-env NODE_ENV=production node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/110EIm/muzic.git"
+  },
+  "author": "MuRye <dreamaker7770@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/110EIm/muzic/issues"
+  },
+  "homepage": "https://github.com/110EIm/muzic#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "fluent-ffmpeg": "^2.1.0",
+    "mongodb": "^2.2.25",
+    "serve-favicon": "^2.4.1",
+    "socket.io": "^1.7.3",
+    "ytdl-core": "^0.10.3"
+  },
+  "devDependencies": {
+    "cross-env": "^3.2.3",
+    "morgan": "^1.8.1"
+  }
+}

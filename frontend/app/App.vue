@@ -3,7 +3,7 @@
 		#wrapper
 			navigation(:toggle='toggleWriter')
 			section.section#board: .container
-				Writer(:isActive='showWriter', :toggle='toggleWriter')
+				Writer(:isActive='showWriter', :toggle='toggleWriter', :create='createMemo')
 				memo(v-for='memo in memos', :key='memo.music', :memo='memo')
 		footer-bar
 </template>
@@ -16,10 +16,11 @@
 
 	import Memo from './components/Memo.vue';
 	import Navigation from './components/Navigation.vue'
-	import Writer from './components/Writer.vue';
+	import Writer from './layouts/Writer.vue';
 	import Footer from './components/Footer.vue';
 	
 	import io from 'socket.io-client'
+	import axios from 'axios';
 
 	const socket = io();
 
@@ -39,12 +40,13 @@
 		}),
 
 		created() {
-			this.memos = [
-				{ id: 1, name: '박성민', text: 'Anything'},
-				{ id: 2, name: 'Anonymous', text: 'HU'},
-				{ id: 3, name: 'GoodBoy', text: 'Good night'},
-				{ id: 4, name: 'asdf', text: 'asdfasdf'}
-			];
+			axios.get('/api/memos')
+				.then((res) => {
+					this.memos = res.data;
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		},
 
 		methods: {
@@ -52,21 +54,21 @@
 				this.showWriter = !this.showWriter;
 			},
 
-			createMemo(memo, flag = true) {
-				if(this.memos.length >= 10) {
+			createMemo(pwd, memo, flag = true) {
+				if(this.memos.length >= 5) {
 					alert('신청곡이 너무 많아 ㅠㅠ 내일 다시 해줄거지?');
 					return;
 				}
 				this.memos.push(memo);
 				if(flag) {
-					socket.emit('req create memo', memo);
+					socket.emit('req create memo', {pwd, memo});
 				}
 			},
 
-			removeMemo(memo, flag = true) {
+			removeMemo(pwd, memo, flag = true) {
 				this.memos.some((v, index) => (v.name === data.name) && (v.text === data.text) ? vm.memos.splice(index, 1) : false);
 				if(flag) {
-					socket.emit('req remove memo', memo);
+					socket.emit('req remove memo', {pwd, memo});
 				}
 			},
 
@@ -106,7 +108,7 @@
 			//TODO error handling
 			return;
 		} else if(!result) {
-			alert('비밀번호가 잘못됐어 :P');
+			alert('비밀번호가 일치하지 않는 것 같아 ㅠ :P');
 			return;
 		}
 		vm.clearMemos(undefined, false);
